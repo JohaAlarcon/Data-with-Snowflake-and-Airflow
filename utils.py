@@ -25,4 +25,17 @@ def get_data (url,liga):
 
     df ['CREATE_AT'] = run_date
 
-    return df 
+    return df
+
+def data_processing(df):
+
+    df_colombia=get_data(df['URL'][0],df['LIGA'][0])
+    df_inglaterra=get_data(df['URL'][1],df['LIGA'][1])
+    df_italia=get_data(df['URL'][2],df['LIGA'][2])
+    df_alemania=get_data(df['URL'][3],df['LIGA'][3])
+    df_francia=get_data(df['URL'][4],df['LIGA'][4])
+
+
+    df_final=pd.concat([df_colombia,df_inglaterra,df_italia,df_francia,df_alemania,df_francia],ignore_index=False)
+
+    return df_final
