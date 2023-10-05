@@ -1,16 +1,15 @@
 import pandas as pd
 import time
 import random
-import os
 import re
 from datetime import datetime
 
-def get_data (url,liga):
+def get_data(url,liga):
 
     tiempo =[1,3,2]
     time.sleep (random.choice(tiempo))
 
-    df = pd.read_html(url)
+    df = pd.read_html(url, delim_whitespace=True)
     df = pd.concat([df[0],df[1]], ignore_index = True, axis=1)
 
     df = df.rename (columns ={0:'Equipo', 1:'J', 2:'G', 3:'E', 4:'P', 5:'GF', 6:'GC', 7:'DIF', 8:'PTS' })
@@ -36,6 +35,6 @@ def data_processing(df):
     df_francia=get_data(df['URL'][4],df['LIGA'][4])
 
 
-    df_final=pd.concat([df_colombia,df_inglaterra,df_italia,df_francia,df_alemania,df_francia],ignore_index=False)
+    df_final=pd.concat([df_colombia,df_inglaterra,df_italia,df_alemania,df_francia],ignore_index=False)
 
     return df_final
